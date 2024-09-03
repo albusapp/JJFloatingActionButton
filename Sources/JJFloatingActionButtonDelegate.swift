@@ -42,4 +42,6 @@ import Foundation
     /// Is called after closing animation. Button state is .closed.
     ///
     @objc optional func floatingActionButtonDidClose(_ button: JJFloatingActionButton)
+    
+    @objc optional func floatingActionButtonShouldHideOverlay(_ button: JJFloatingActionButton) -> Bool
 }

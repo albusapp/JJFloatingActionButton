@@ -88,7 +88,6 @@ import UIKit
         }
         buttonState = .closing
         delegate?.floatingActionButtonWillClose?(self)
-        overlayView.isEnabled = false
 
         let animationGroup = DispatchGroup()
 
@@ -148,6 +147,10 @@ private extension JJFloatingActionButton {
 
 private extension JJFloatingActionButton {
     func addOverlayView(to superview: UIView) {
+        guard overlayView.superview == nil else {
+            return
+        }
+
         overlayView.isEnabled = true
         superview.insertSubview(overlayView, belowSubview: self)
         overlayView.translatesAutoresizingMaskIntoConstraints = false
@@ -158,6 +161,10 @@ private extension JJFloatingActionButton {
     }
 
     func showOverlay(animated: Bool, group: DispatchGroup) {
+        guard self.overlayView.alpha == 0 else {
+            return
+        }
+
         let buttonAnimation: () -> Void = {
             self.overlayView.alpha = 1
         }
@@ -170,6 +177,12 @@ private extension JJFloatingActionButton {
     }
 
     func hideOverlay(animated: Bool, group: DispatchGroup) {
+        if self.delegate?.floatingActionButtonShouldHideOverlay?(self) == false {
+            return
+        }
+        
+        overlayView.isEnabled = false
+        
         let animations: () -> Void = {
             self.overlayView.alpha = 0
         }

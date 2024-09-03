@@ -287,6 +287,8 @@ import UIKit
     var currentButtonAnimationConfiguration: JJButtonAnimationConfiguration?
     var currentItemAnimationConfiguration: JJItemAnimationConfiguration?
     var openItems: [JJActionItem] = []
+    
+    public var onOverlayTapped: (() -> Void)?
 
     fileprivate var defaultItemConfiguration: ((JJActionItem) -> Void)?
     fileprivate var itemsWithSetup: Set<JJActionItem> = []
@@ -570,14 +572,15 @@ private extension JJFloatingActionButton {
             return
         }
 
+        sender.callAction()
+        
         if closeAutomatically {
             close()
         }
-        sender.callAction()
     }
 
     @objc func overlayViewWasTapped() {
-        close()
+        self.onOverlayTapped?()
     }
 
     func handleSingleActionOrOpen() {
