@@ -132,14 +132,14 @@ extension JJFloatingActionButton {
 private extension JJFloatingActionButton {
     func storeAnimationState() {
         openItems = enabledItems
-        currentItemAnimationConfiguration = itemAnimationConfiguration
+//        currentItemAnimationConfiguration = itemAnimationConfiguration
         currentButtonAnimationConfiguration = buttonAnimationConfiguration
     }
 
     func resetAnimationState() {
         openItems.removeAll()
         currentButtonAnimationConfiguration = nil
-        currentItemAnimationConfiguration = nil
+//        currentItemAnimationConfiguration = nil
     }
 }
 

@@ -285,7 +285,11 @@ import UIKit
     }()
 
     var currentButtonAnimationConfiguration: JJButtonAnimationConfiguration?
-    var currentItemAnimationConfiguration: JJItemAnimationConfiguration?
+    var currentItemAnimationConfiguration: JJItemAnimationConfiguration? {
+        get {
+            self.itemAnimationConfiguration
+        }
+    }
     var openItems: [JJActionItem] = []
     
     public var onOverlayTapped: (() -> Void)?
